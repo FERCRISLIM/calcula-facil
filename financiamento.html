@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de Financiamento | Calcula Fácil</title>
+<meta name="description" content="Calculadoras financeiras gratuitas para simular juros, investimentos e financiamentos.">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google, sem alterar o código do anúncio. -->
+</head>
+<body>
+<header><div class="container nav">
+<a class="logo" href="index.html">Calcula<span>Fácil</span></a>
+<nav>
+<a href="juros-compostos.html">Juros compostos</a>
+<a href="financiamento.html">Financiamento</a>
+<a href="juros-simples.html">Juros simples</a>
+<a href="investimento.html">Investimentos</a>
+<a href="sobre.html">Sobre</a>
+</nav></div></header>
+
+<section><div class="container"><span class="badge">SIMULADOR</span><h1>Calculadora de Financiamento</h1><p class="lead">Estime parcela, total pago e juros de um financiamento com parcelas fixas.</p>
+<div class="card"><div class="form-grid">
+<div><label>Valor do bem (R$)</label><input id="valor" type="number" min="0" step=".01" value="60000"></div>
+<div><label>Entrada (R$)</label><input id="entrada" type="number" min="0" step=".01" value="10000"></div>
+<div><label>Taxa mensal (%)</label><input id="taxa" type="number" min="0" step=".01" value="1"></div>
+<div><label>Número de parcelas</label><input id="parcelas" type="number" min="1" step="1" value="48"></div>
+</div><div class="actions"><button class="btn btn-primary" onclick="calcFin()">Calcular</button></div></div>
+<div class="result-grid"><div class="result highlight"><small>Parcela estimada</small><strong id="parcela">R$ 0,00</strong></div><div class="result"><small>Total pago</small><strong id="totalFin">R$ 0,00</strong></div><div class="result"><small>Juros estimados</small><strong id="jurosFin">R$ 0,00</strong></div></div>
+<div class="ad-slot">Espaço publicitário</div>
+<div class="card article"><h2>O que observar em um financiamento?</h2><p>A taxa de juros é apenas um dos elementos do custo. Tarifas, seguros, impostos e outras despesas podem fazer o custo efetivo ser diferente de uma simulação simples.</p><p>Use o resultado para comparar cenários e sempre confira o contrato e o Custo Efetivo Total (CET) oferecido pela instituição.</p></div>
+</div></section>
+
+<footer><div class="container footer-grid">
+<div><h3>Calcula Fácil</h3><p>Ferramentas gratuitas para ajudar você a entender melhor seus números.</p></div>
+<div><h3>Calculadoras</h3><p><a href="juros-compostos.html">Juros compostos</a><br><a href="financiamento.html">Financiamento</a><br><a href="investimento.html">Investimentos</a></p></div>
+<div><h3>Informações</h3><p><a href="sobre.html">Sobre</a><br><a href="privacidade.html">Privacidade</a><br><a href="termos.html">Termos</a><br><a href="contato.html">Contato</a></p></div>
+</div><div class="container small">© 2026 Calcula Fácil. Os resultados são estimativas e não constituem recomendação financeira.</div></footer>
+<script src="js/app.js"></script><script>calcFin();</script>
+</body></html>
