@@ -3,65 +3,604 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 ```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Calculadora de Juros Compostos: Simule Investimentos | Calcula Fácil</title>
 
-<meta name="description" content="Calcule juros compostos gratuitamente com valor inicial, aportes mensais, taxa ao mês ou ao ano e prazo. Veja patrimônio final, juros acumulados, gráfico e evolução mês a mês.">
+<meta name="description" content="Calcule juros compostos com valor inicial, aportes mensais, taxa mensal ou anual e prazo. Veja o patrimônio final, total investido, juros acumulados, gráfico e tabela mês a mês.">
 
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<meta name="author" content="Calcula Fácil">
+
+<meta name="theme-color" content="#0f766e">
 
 <link rel="canonical" href="https://fercrislim.github.io/calcula-facil/juros-compostos.html">
 
-<meta property="og:title" content="Calculadora de Juros Compostos | Calcula Fácil">
-<meta property="og:description" content="Simule juros compostos com valor inicial, aportes mensais, taxa e prazo. Veja a evolução estimada do seu patrimônio.">
+<!-- Open Graph -->
 <meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Calcula Fácil">
+<meta property="og:title" content="Calculadora de Juros Compostos | Calcula Fácil">
+<meta property="og:description" content="Simule juros compostos com aportes mensais e veja a evolução estimada do seu patrimônio.">
 <meta property="og:url" content="https://fercrislim.github.io/calcula-facil/juros-compostos.html">
 
-<link rel="stylesheet" href="css/style.css">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calculadora de Juros Compostos | Calcula Fácil">
+<meta name="twitter:description" content="Calcule juros compostos, aportes mensais e evolução do patrimônio.">
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://fercrislim.github.io/calcula-facil/#website",
+            "url": "https://fercrislim.github.io/calcula-facil/",
+            "name": "Calcula Fácil",
+            "description": "Calculadoras financeiras gratuitas para simulações e educação financeira."
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://fercrislim.github.io/calcula-facil/juros-compostos.html#webpage",
+            "url": "https://fercrislim.github.io/calcula-facil/juros-compostos.html",
+            "name": "Calculadora de Juros Compostos",
+            "description": "Calculadora gratuita de juros compostos com aportes mensais, taxa mensal ou anual e projeção mês a mês.",
+            "isPartOf": {
+                "@id": "https://fercrislim.github.io/calcula-facil/#website"
+            },
+            "inLanguage": "pt-BR"
+        },
+        {
+            "@type": "WebApplication",
+            "@id": "https://fercrislim.github.io/calcula-facil/juros-compostos.html#application",
+            "name": "Calculadora de Juros Compostos",
+            "url": "https://fercrislim.github.io/calcula-facil/juros-compostos.html",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://fercrislim.github.io/calcula-facil/juros-compostos.html#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Calcula Fácil",
+                    "item": "https://fercrislim.github.io/calcula-facil/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Juros Compostos",
+                    "item": "https://fercrislim.github.io/calcula-facil/juros-compostos.html"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://fercrislim.github.io/calcula-facil/juros-compostos.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "O que são juros compostos?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Juros compostos são um regime em que os juros acumulados são incorporados ao saldo e passam a participar do cálculo dos períodos seguintes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Como calcular juros compostos?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Para calcular juros compostos é necessário considerar o valor inicial, a taxa de juros e o número de períodos. Quando existem aportes periódicos, os aportes também devem ser considerados na projeção."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Posso calcular juros compostos com aportes mensais?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Sim. A calculadora permite informar um valor inicial e um aporte mensal para estimar a evolução do patrimônio ao longo do tempo."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Posso informar uma taxa anual?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Sim. A calculadora permite escolher entre taxa mensal e taxa anual. Quando uma taxa anual é informada, ela é convertida para uma taxa mensal efetiva para a simulação."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Qual a diferença entre juros simples e juros compostos?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Nos juros simples, os juros são calculados sobre o capital inicial. Nos juros compostos, os juros acumulados passam a fazer parte do saldo utilizado nos períodos seguintes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto maior o prazo, maior será o resultado?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Mantendo as demais condições constantes e utilizando uma taxa positiva, um prazo maior tende a aumentar o patrimônio projetado. Isso é uma característica matemática da simulação e não uma garantia de rentabilidade futura."
+                    }
+                }
+            ]
+        }
+    ]
+}
+</script>
+
+<style>
+    :root {
+        --primary: #0f766e;
+        --primary-dark: #115e59;
+        --primary-light: #ccfbf1;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text: #1e293b;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --success: #15803d;
+        --warning-bg: #fffbeb;
+        --warning-border: #f59e0b;
+        --shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        --radius: 14px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--background);
+        color: var(--text);
+        line-height: 1.65;
+    }
+
+    a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .nav {
+        max-width: 1100px;
+        margin: auto;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary);
+        white-space: nowrap;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    nav a {
+        font-size: 0.92rem;
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    main {
+        max-width: 1100px;
+        margin: auto;
+        padding: 35px 20px 60px;
+    }
+
+    .breadcrumb {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+
+    .hero {
+        margin-bottom: 25px;
+    }
+
+    .eyebrow {
+        color: var(--primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.15;
+        margin: 8px 0 14px;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+        margin-top: 0;
+        line-height: 1.25;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .lead {
+        color: var(--muted);
+        font-size: 1.08rem;
+        max-width: 800px;
+    }
+
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 25px;
+        margin: 25px 0;
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    label {
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+        padding: 10px 13px;
+        font-size: 1rem;
+        background: #fff;
+        color: var(--text);
+    }
+
+    input:focus,
+    select:focus {
+        outline: 3px solid rgba(15, 118, 110, 0.18);
+        border-color: var(--primary);
+    }
+
+    .button-area {
+        margin-top: 20px;
+    }
+
+    button {
+        border: 0;
+        border-radius: 9px;
+        min-height: 50px;
+        padding: 12px 22px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: var(--primary-dark);
+    }
+
+    button:focus {
+        outline: 3px solid rgba(15, 118, 110, 0.25);
+    }
+
+    .hint {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
+
+    .error {
+        display: none;
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        border-radius: 9px;
+        padding: 12px 15px;
+        margin-top: 15px;
+    }
+
+    .results {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .result {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px;
+    }
+
+    .result-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .result-value {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+    }
+
+    .chart-container {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        margin-top: 20px;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 10px;
+        background: #fff;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 750px;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid var(--border);
+        padding: 11px 10px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+        text-align: center;
+    }
+
+    th {
+        background: #f1f5f9;
+        font-size: 0.9rem;
+    }
+
+    .formula {
+        background: #f8fafc;
+        border-left: 4px solid var(--primary);
+        padding: 18px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 18px 0;
+    }
+
+    .formula strong {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .math {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.3rem;
+        text-align: center;
+        margin: 12px 0;
+    }
+
+    .definitions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .definition {
+        border: 1px solid var(--border);
+        padding: 15px;
+        border-radius: 9px;
+        background: #fff;
+    }
+
+    .definition strong {
+        color: var(--primary-dark);
+    }
+
+    details {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin: 10px 0;
+        background: #fff;
+    }
+
+    summary {
+        cursor: pointer;
+        padding: 16px;
+        font-weight: 700;
+    }
+
+    details p {
+        padding: 0 16px 16px;
+        margin: 0;
+    }
+
+    .links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .link-card {
+        display: block;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px;
+        background: #fff;
+        font-weight: 700;
+    }
+
+    .link-card:hover {
+        text-decoration: none;
+        border-color: var(--primary);
+        box-shadow: var(--shadow);
+    }
+
+    .notice {
+        background: var(--warning-bg);
+        border-left: 4px solid var(--warning-border);
+        padding: 16px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    footer {
+        background: #0f172a;
+        color: #cbd5e1;
+        padding: 35px 20px;
+    }
+
+    .footer-inner {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin: 15px 0;
+    }
+
+    footer a {
+        color: #e2e8f0;
+    }
+
+    .small {
+        font-size: 0.85rem;
+        color: #94a3b8;
+    }
+
+    @media (max-width: 800px) {
+        .nav {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        nav {
+            gap: 10px;
+        }
+
+        .calculator-grid,
+        .results,
+        .definitions,
+        .links {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-container {
+            height: 280px;
+        }
+
+        main {
+            padding-left: 14px;
+            padding-right: 14px;
+        }
+
+        .card {
+            padding: 18px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .result-value {
+            font-size: 1.25rem;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+</style>
 ```
 
 </head>
 
 <body>
 
-<header class="site-header">
+<header>
+    <div class="nav">
+        <a class="logo" href="index.html" aria-label="Calcula Fácil - página inicial">
+            Calcula Fácil
+        </a>
 
 ```
-<div class="container">
-
-    <a href="index.html" class="logo">
-        CalculaFácil
-    </a>
-
-    <nav class="main-nav" aria-label="Navegação principal">
-
-        <a href="juros-compostos.html">
-            Juros compostos
-        </a>
-
-        <a href="financiamento.html">
-            Financiamento
-        </a>
-
-        <a href="juros-simples.html">
-            Juros simples
-        </a>
-
-        <a href="investimento.html">
-            Investimentos
-        </a>
-
-        <a href="sobre.html">
-            Sobre
-        </a>
-
+    <nav aria-label="Navegação principal">
+        <a href="juros-compostos.html">Juros compostos</a>
+        <a href="financiamento.html">Financiamento</a>
+        <a href="juros-simples.html">Juros simples</a>
+        <a href="investimentos.html">Investimentos</a>
+        <a href="sobre.html">Sobre</a>
     </nav>
-
 </div>
 ```
 
@@ -70,760 +609,504 @@
 <main>
 
 ```
-<!-- HERO -->
+<div class="breadcrumb">
+    <a href="index.html">Calcula Fácil</a>
+    &nbsp;›&nbsp;
+    Juros compostos
+</div>
 
 <section class="hero">
+    <div class="eyebrow">Calculadora financeira</div>
 
-    <div class="container">
+    <h1>Calculadora de Juros Compostos</h1>
 
-        <span class="badge">
-            CALCULADORA FINANCEIRA
-        </span>
+    <p class="lead">
+        Simule quanto seu dinheiro pode crescer com juros compostos,
+        considerando valor inicial, aportes mensais, taxa de juros e prazo.
+    </p>
+</section>
 
-        <h1>
-            Calculadora de Juros Compostos
-        </h1>
+<section class="card" id="calculadora">
 
-        <p>
-            Simule quanto seu dinheiro pode crescer com juros compostos,
-            considerando valor inicial, aportes mensais, taxa de juros e prazo.
-        </p>
+    <h2>Faça sua simulação</h2>
+
+    <p>
+        Informe os valores abaixo para calcular uma estimativa do
+        patrimônio acumulado ao longo do tempo.
+    </p>
+
+    <div class="calculator-grid">
+
+        <div class="field">
+            <label for="valorInicial">Valor inicial (R$)</label>
+            <input
+                type="text"
+                id="valorInicial"
+                inputmode="decimal"
+                value="1000"
+                placeholder="Ex.: 1000"
+                aria-describedby="valorInicialHelp">
+            <span class="small" id="valorInicialHelp">
+                Valor aplicado inicialmente.
+            </span>
+        </div>
+
+        <div class="field">
+            <label for="aporteMensal">Aporte mensal (R$)</label>
+            <input
+                type="text"
+                id="aporteMensal"
+                inputmode="decimal"
+                value="200"
+                placeholder="Ex.: 200">
+        </div>
+
+        <div class="field">
+            <label for="taxa">Taxa de juros (%)</label>
+            <input
+                type="text"
+                id="taxa"
+                inputmode="decimal"
+                value="1"
+                placeholder="Ex.: 1">
+        </div>
+
+        <div class="field">
+            <label for="tipoTaxa">Taxa</label>
+            <select id="tipoTaxa">
+                <option value="mensal">Ao mês</option>
+                <option value="anual">Ao ano</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="tempo">Tempo</label>
+            <input
+                type="number"
+                id="tempo"
+                min="1"
+                step="1"
+                value="12"
+                placeholder="Ex.: 12">
+        </div>
+
+        <div class="field">
+            <label for="tipoTempo">Tempo em</label>
+            <select id="tipoTempo">
+                <option value="meses">Meses</option>
+                <option value="anos">Anos</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="button-area">
+        <button type="button" id="calcular">
+            Calcular juros compostos
+        </button>
+    </div>
+
+    <div class="error" id="erro" role="alert"></div>
+
+    <p class="hint">
+        O aporte é considerado no final de cada mês.
+        Quando a taxa informada é anual, ela é convertida para uma
+        taxa mensal efetiva para a simulação.
+    </p>
+
+    <div class="results" aria-live="polite">
+
+        <div class="result">
+            <div class="result-label">Patrimônio final</div>
+            <div class="result-value" id="patrimonioFinal">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="result">
+            <div class="result-label">Total que saiu do bolso</div>
+            <div class="result-value" id="totalInvestido">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="result">
+            <div class="result-label">Total em juros</div>
+            <div class="result-value" id="totalJuros">
+                R$ 0,00
+            </div>
+        </div>
 
     </div>
 
 </section>
 
+<section class="card">
 
-<!-- CALCULADORA -->
+    <h2>Evolução do patrimônio</h2>
 
-<section class="calculator-section">
+    <p>
+        Acompanhe visualmente a evolução estimada do patrimônio
+        durante o período informado.
+    </p>
 
-    <div class="container">
+    <div class="chart-container">
+        <canvas id="grafico" aria-label="Gráfico da evolução do patrimônio" role="img"></canvas>
+    </div>
 
+</section>
 
-        <div class="calculator-card">
+<section class="card">
 
-            <h2>
-                Faça sua simulação
-            </h2>
+    <h2>Simulação mês a mês</h2>
 
-            <p>
-                Informe os valores abaixo para calcular uma estimativa
-                do patrimônio acumulado ao longo do tempo.
-            </p>
+    <p>
+        Confira como o valor investido e os juros acumulados podem
+        evoluir ao longo da simulação.
+    </p>
 
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Aporte</th>
+                    <th>Juros do mês</th>
+                    <th>Juros acumulados</th>
+                    <th>Total investido</th>
+                    <th>Patrimônio</th>
+                </tr>
+            </thead>
 
-            <!-- VALOR INICIAL -->
+            <tbody id="tabelaCorpo"></tbody>
+        </table>
+    </div>
 
-            <div class="form-group">
+</section>
 
-                <label for="inicial">
-                    Valor inicial (R$)
-                </label>
+<section class="card">
 
-                <input
-                    type="number"
-                    id="inicial"
-                    min="0"
-                    step="0.01"
-                    placeholder="Ex.: 1000"
-                >
+    <h2>Fórmula dos juros compostos</h2>
 
-            </div>
+    <p>
+        Para uma aplicação sem novos aportes, a fórmula básica dos
+        juros compostos é:
+    </p>
 
+    <div class="formula">
+        <div class="math">
+            M = C × (1 + i)<sup>n</sup>
+        </div>
+    </div>
 
-            <!-- APORTE -->
+    <div class="definitions">
 
-            <div class="form-group">
-
-                <label for="aporte">
-                    Aporte mensal (R$)
-                </label>
-
-                <input
-                    type="number"
-                    id="aporte"
-                    min="0"
-                    step="0.01"
-                    placeholder="Ex.: 200"
-                >
-
-            </div>
-
-
-            <!-- TAXA -->
-
-            <div class="form-group">
-
-                <label for="taxa">
-                    Taxa de juros (%)
-                </label>
-
-                <input
-                    type="number"
-                    id="taxa"
-                    min="0"
-                    step="0.01"
-                    placeholder="Ex.: 1"
-                >
-
-            </div>
-
-
-            <!-- TIPO DE TAXA -->
-
-            <div class="form-group">
-
-                <label for="tipoTaxa">
-                    Taxa
-                </label>
-
-                <select id="tipoTaxa">
-
-                    <option value="mensal">
-                        Ao mês
-                    </option>
-
-                    <option value="anual">
-                        Ao ano
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- TEMPO -->
-
-            <div class="form-group">
-
-                <label for="tempo">
-                    Tempo
-                </label>
-
-                <input
-                    type="number"
-                    id="tempo"
-                    min="1"
-                    step="1"
-                    placeholder="Ex.: 60"
-                >
-
-            </div>
-
-
-            <!-- TIPO DE TEMPO -->
-
-            <div class="form-group">
-
-                <label for="tipoTempo">
-                    Tempo em
-                </label>
-
-                <select id="tipoTempo">
-
-                    <option value="meses">
-                        Meses
-                    </option>
-
-                    <option value="anos">
-                        Anos
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- BOTÃO -->
-
-            <button
-                type="button"
-                onclick="calcCompound()"
-            >
-                Calcular juros compostos
-            </button>
-
-
-            <p class="calculator-note">
-
-                O aporte é considerado no final de cada mês.
-                Quando a taxa informada é anual, ela é convertida
-                para uma taxa mensal efetiva para a simulação.
-
-            </p>
-
+        <div class="definition">
+            <strong>M</strong>
+            = montante ou valor final.
         </div>
 
-
-        <!-- RESULTADOS -->
-
-        <div class="results-card">
-
-            <h2>
-                Resultado da simulação
-            </h2>
-
-
-            <div class="results-grid">
-
-
-                <div class="result-item">
-
-                    <span>
-                        Patrimônio final
-                    </span>
-
-                    <strong id="final">
-                        R$ 0,00
-                    </strong>
-
-                </div>
-
-
-                <div class="result-item">
-
-                    <span>
-                        Total que saiu do bolso
-                    </span>
-
-                    <strong id="bolso">
-                        R$ 0,00
-                    </strong>
-
-                </div>
-
-
-                <div class="result-item">
-
-                    <span>
-                        Total em juros
-                    </span>
-
-                    <strong id="juros">
-                        R$ 0,00
-                    </strong>
-
-                </div>
-
-
-            </div>
-
+        <div class="definition">
+            <strong>C</strong>
+            = capital ou valor inicial.
         </div>
 
-
-        <!-- GRÁFICO -->
-
-        <section class="chart-section">
-
-            <h2>
-                📈 Evolução do patrimônio
-            </h2>
-
-            <p>
-                Veja no gráfico como o patrimônio estimado
-                pode evoluir durante o período da simulação.
-            </p>
-
-
-            <div
-                style="
-                    position: relative;
-                    width: 100%;
-                    height: 380px;
-                    margin-top: 25px;
-                "
-            >
-
-                <canvas id="chart"></canvas>
-
-            </div>
-
-        </section>
-
-
-        <!-- TABELA -->
-
-        <section class="table-section">
-
-            <h2>
-                Simulação mês a mês
-            </h2>
-
-            <p>
-                Confira como o valor investido e os juros acumulados
-                podem evoluir ao longo da simulação.
-            </p>
-
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Mês
-                            </th>
-
-                            <th>
-                                Aporte
-                            </th>
-
-                            <th>
-                                Juros do mês
-                            </th>
-
-                            <th>
-                                Juros acumulados
-                            </th>
-
-                            <th>
-                                Total investido
-                            </th>
-
-                            <th>
-                                Patrimônio
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="tbody">
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-        <!-- FÓRMULA -->
-
-        <section class="content-section">
-
-            <div class="formula-box">
-
-                <h2>
-                    Fórmula dos juros compostos
-                </h2>
-
-                <p>
-                    A fórmula básica dos juros compostos permite calcular
-                    o montante acumulado a partir de um capital inicial,
-                    uma taxa de juros e um determinado período.
-                </p>
-
-
-                <div class="formula">
-
-                    M = C × (1 + i)<sup>t</sup>
-
-                </div>
-
-
-                <p>
-                    <strong>Onde:</strong>
-                </p>
-
-
-                <ul>
-
-                    <li>
-                        <strong>M</strong> = montante final
-                    </li>
-
-                    <li>
-                        <strong>C</strong> = capital inicial
-                    </li>
-
-                    <li>
-                        <strong>i</strong> = taxa de juros por período
-                    </li>
-
-                    <li>
-                        <strong>t</strong> = número de períodos
-                    </li>
-
-                </ul>
-
-
-                <p>
-                    Quando existem aportes periódicos, o cálculo também
-                    considera os novos valores adicionados ao investimento
-                    durante o período.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTEÚDO -->
-
-        <article class="content-section">
-
-            <h2>
-                O que são juros compostos?
-            </h2>
-
-            <p>
-                Juros compostos são uma forma de calcular rendimentos
-                em que os juros acumulados passam a fazer parte do saldo
-                utilizado no cálculo dos períodos seguintes.
-            </p>
-
-            <p>
-                Na prática, isso significa que o crescimento ocorre
-                sobre o valor inicialmente aplicado e também sobre
-                os rendimentos acumulados anteriormente.
-            </p>
-
-
-            <h2>
-                Como os juros compostos funcionam nos investimentos?
-            </h2>
-
-            <p>
-                Em uma simulação de investimento, o resultado depende
-                de fatores como valor inicial, taxa de rendimento,
-                período e novos aportes realizados ao longo do tempo.
-            </p>
-
-            <p>
-                Quando uma pessoa mantém aportes regulares, cada novo
-                aporte também pode permanecer aplicado e participar
-                da evolução do patrimônio nos períodos seguintes.
-            </p>
-
-
-            <h2>
-                Por que o tempo é importante?
-            </h2>
-
-            <p>
-                O tempo pode ter grande influência em uma simulação
-                de juros compostos porque os rendimentos acumulados
-                continuam participando dos cálculos dos períodos seguintes.
-            </p>
-
-            <p>
-                Por esse motivo, comparar diferentes prazos pode ajudar
-                a entender como pequenas mudanças no período de investimento
-                podem alterar o resultado final.
-            </p>
-
-
-            <h2>
-                O que são aportes mensais?
-            </h2>
-
-            <p>
-                Aporte mensal é o valor adicional colocado no investimento
-                periodicamente. Na calculadora, o aporte é considerado
-                no final de cada mês.
-            </p>
-
-            <p>
-                Por exemplo, uma pessoa pode informar um valor inicial
-                e adicionar uma determinada quantia todos os meses.
-                A ferramenta calcula uma estimativa considerando esses
-                novos aportes durante o período informado.
-            </p>
-
-
-            <h2>
-                Taxa mensal ou taxa anual?
-            </h2>
-
-            <p>
-                A taxa de juros pode ser informada ao mês ou ao ano.
-                Quando a opção anual é escolhida, a calculadora converte
-                a taxa para uma taxa mensal efetiva para realizar a simulação.
-            </p>
-
-            <p>
-                É importante observar que taxas nominais, efetivas e
-                condições de investimentos reais podem seguir regras
-                diferentes. Por isso, o resultado da calculadora deve
-                ser interpretado como uma estimativa matemática.
-            </p>
-
-
-            <h2>
-                Juros compostos são iguais a rendimento garantido?
-            </h2>
-
-            <p>
-                Não. A calculadora apenas aplica uma taxa informada pelo
-                usuário para realizar uma projeção matemática. Isso não
-                significa que um investimento real apresentará exatamente
-                aquela rentabilidade.
-            </p>
-
-            <p>
-                Investimentos podem estar sujeitos a variações de
-                rentabilidade, impostos, taxas, inflação e outras
-                condições específicas.
-            </p>
-
-
-            <h2>
-                Como interpretar o resultado?
-            </h2>
-
-            <p>
-                O patrimônio final representa o valor estimado acumulado
-                ao final do período da simulação.
-            </p>
-
-            <p>
-                O total que saiu do bolso representa o valor inicial
-                somado aos aportes realizados durante o período.
-            </p>
-
-            <p>
-                O total em juros representa a diferença estimada entre
-                o patrimônio final e o total investido.
-            </p>
-
-
-            <h2>
-                Exemplo de juros compostos
-            </h2>
-
-            <p>
-                Imagine uma simulação com um valor inicial de R$ 1.000,
-                uma taxa positiva e um determinado prazo. Ao longo do
-                tempo, os rendimentos calculados passam a fazer parte
-                do saldo utilizado nos períodos seguintes.
-            </p>
-
-            <p>
-                Se também forem realizados aportes mensais, esses valores
-                são adicionados ao patrimônio e passam a participar
-                da evolução da simulação.
-            </p>
-
-            <p>
-                Esse exemplo é apenas uma demonstração matemática.
-                O resultado de um investimento real pode ser diferente
-                devido a taxas, impostos, inflação e variações de
-                rentabilidade.
-            </p>
-
-        </article>
-
-
-        <!-- FAQ -->
-
-        <section class="faq-section">
-
-            <h2>
-                Perguntas frequentes sobre juros compostos
-            </h2>
-
-
-            <h3>
-                O que é juros compostos?
-            </h3>
-
-            <p>
-                É um regime em que os juros acumulados são incorporados
-                ao saldo e passam a participar do cálculo dos períodos seguintes.
-            </p>
-
-
-            <h3>
-                Como calcular juros compostos?
-            </h3>
-
-            <p>
-                O cálculo depende do valor inicial, da taxa de juros
-                e do período. Quando existem aportes periódicos,
-                eles também precisam ser considerados na projeção.
-            </p>
-
-
-            <h3>
-                Posso calcular investimentos com aportes mensais?
-            </h3>
-
-            <p>
-                Sim. Esta calculadora permite informar um valor inicial
-                e um aporte mensal para estimar a evolução do patrimônio
-                ao longo do tempo.
-            </p>
-
-
-            <h3>
-                Posso informar uma taxa anual?
-            </h3>
-
-            <p>
-                Sim. A calculadora permite escolher entre taxa mensal
-                e taxa anual. Quando a taxa anual é selecionada,
-                ela é convertida para uma taxa mensal efetiva para
-                a simulação.
-            </p>
-
-
-            <h3>
-                Os resultados representam o que vou ganhar em um investimento real?
-            </h3>
-
-            <p>
-                Não necessariamente. O resultado é uma projeção matemática
-                baseada na taxa informada. Investimentos reais podem
-                apresentar custos, impostos, variações de rentabilidade
-                e outras condições.
-            </p>
-
-
-            <h3>
-                Quanto maior o prazo, maior será o resultado?
-            </h3>
-
-            <p>
-                Mantendo as demais condições constantes e utilizando
-                uma taxa positiva, um prazo maior tende a aumentar
-                o patrimônio projetado. Entretanto, isso é uma característica
-                matemática da simulação e não uma garantia de rentabilidade futura.
-            </p>
-
-        </section>
-
-
-        <!-- CTA -->
-
-        <section class="cta-section">
-
-            <h2>
-                Continue sua simulação
-            </h2>
-
-            <p>
-                Depois de calcular os juros compostos, você pode utilizar
-                outras ferramentas gratuitas do Calcula Fácil para comparar
-                diferentes situações financeiras.
-            </p>
-
-
-            <div class="cta-links">
-
-                <a href="financiamento.html">
-                    Calculadora de financiamento
-                </a>
-
-                <a href="juros-simples.html">
-                    Calculadora de juros simples
-                </a>
-
-                <a href="investimento.html">
-                    Calculadora de investimentos
-                </a>
-
-            </div>
-
-        </section>
-
+        <div class="definition">
+            <strong>i</strong>
+            = taxa de juros por período.
+        </div>
+
+        <div class="definition">
+            <strong>n</strong>
+            = quantidade de períodos.
+        </div>
 
     </div>
+
+    <h3>Juros compostos com aportes mensais</h3>
+
+    <p>
+        Quando existem aportes realizados periodicamente, cada novo
+        aporte também passa a participar da evolução do patrimônio.
+        Por isso, a simulação mês a mês é utilizada para representar
+        a evolução do saldo.
+    </p>
+
+    <div class="formula">
+        <div class="math">
+            M = C × (1 + i)<sup>n</sup>
+        </div>
+
+        <p>
+            Para cada mês, o saldo anterior é atualizado pela taxa
+            e o aporte é acrescentado ao final do período.
+        </p>
+    </div>
+
+</section>
+
+<section class="card">
+
+    <h2>O que são juros compostos?</h2>
+
+    <p>
+        Juros compostos são uma forma de calcular rendimentos em que
+        os juros acumulados passam a fazer parte do saldo utilizado
+        no cálculo dos períodos seguintes.
+    </p>
+
+    <p>
+        Na prática, isso significa que o crescimento ocorre sobre
+        o valor inicialmente aplicado e também sobre os rendimentos
+        acumulados anteriormente.
+    </p>
+
+    <h2>Como os juros compostos funcionam nos investimentos?</h2>
+
+    <p>
+        Em uma simulação de investimento, o resultado depende de
+        fatores como valor inicial, taxa de rendimento, período e
+        novos aportes realizados ao longo do tempo.
+    </p>
+
+    <p>
+        Quando uma pessoa mantém aportes regulares, cada novo aporte
+        também pode permanecer aplicado e participar da evolução
+        do patrimônio nos períodos seguintes.
+    </p>
+
+    <h2>Por que o tempo é importante?</h2>
+
+    <p>
+        O tempo pode ter grande influência em uma simulação de juros
+        compostos porque os rendimentos acumulados continuam
+        participando dos cálculos dos períodos seguintes.
+    </p>
+
+    <p>
+        Por esse motivo, comparar diferentes prazos pode ajudar a
+        entender como mudanças no período podem alterar o resultado
+        final.
+    </p>
+
+    <h2>O que são aportes mensais?</h2>
+
+    <p>
+        Aporte mensal é o valor adicional colocado no investimento
+        periodicamente. Nesta calculadora, o aporte é considerado
+        no final de cada mês.
+    </p>
+
+    <h2>Taxa mensal ou taxa anual?</h2>
+
+    <p>
+        A taxa de juros pode ser informada ao mês ou ao ano.
+        Quando a opção anual é escolhida, a calculadora converte
+        a taxa para uma taxa mensal efetiva para realizar a simulação.
+    </p>
+
+    <p>
+        A conversão considera a equivalência matemática entre a
+        taxa anual informada e os 12 períodos mensais.
+    </p>
+
+    <div class="formula">
+        <div class="math">
+            i<sub>m</sub> = (1 + i<sub>a</sub>)<sup>1/12</sup> − 1
+        </div>
+    </div>
+
+    <h2>Juros compostos são iguais a rendimento garantido?</h2>
+
+    <p>
+        Não. A calculadora apenas aplica uma taxa informada pelo
+        usuário para realizar uma projeção matemática.
+    </p>
+
+    <p>
+        Isso não significa que um investimento real apresentará
+        exatamente aquela rentabilidade.
+    </p>
+
+    <p>
+        Investimentos podem estar sujeitos a variações de rentabilidade,
+        impostos, taxas, inflação e outras condições específicas.
+    </p>
+
+    <h2>Como interpretar o resultado?</h2>
+
+    <p>
+        O patrimônio final representa o valor estimado acumulado
+        ao final do período da simulação.
+    </p>
+
+    <p>
+        O total que saiu do bolso representa o valor inicial
+        somado aos aportes realizados durante o período.
+    </p>
+
+    <p>
+        O total em juros representa a diferença estimada entre
+        o patrimônio final e o total investido.
+    </p>
+
+</section>
+
+<section class="card" id="faq">
+
+    <h2>Perguntas frequentes sobre juros compostos</h2>
+
+    <details>
+        <summary>O que são juros compostos?</summary>
+        <p>
+            É um regime em que os juros acumulados são incorporados
+            ao saldo e passam a participar do cálculo dos períodos
+            seguintes.
+        </p>
+    </details>
+
+    <details>
+        <summary>Como calcular juros compostos?</summary>
+        <p>
+            O cálculo depende do valor inicial, da taxa de juros e
+            do período. Quando existem aportes periódicos, eles
+            também precisam ser considerados na projeção.
+        </p>
+    </details>
+
+    <details>
+        <summary>Qual a diferença entre juros simples e compostos?</summary>
+        <p>
+            Nos juros simples, os juros são calculados sobre o capital
+            inicial. Nos juros compostos, os juros acumulados passam
+            a participar dos cálculos dos períodos seguintes.
+        </p>
+    </details>
+
+    <details>
+        <summary>Posso calcular investimentos com aportes mensais?</summary>
+        <p>
+            Sim. Esta calculadora permite informar um valor inicial
+            e um aporte mensal para estimar a evolução do patrimônio
+            ao longo do tempo.
+        </p>
+    </details>
+
+    <details>
+        <summary>Posso informar uma taxa anual?</summary>
+        <p>
+            Sim. A calculadora permite escolher entre taxa mensal e
+            taxa anual. Quando a taxa anual é selecionada, ela é
+            convertida para uma taxa mensal efetiva para a simulação.
+        </p>
+    </details>
+
+    <details>
+        <summary>Como transformar uma taxa anual em mensal?</summary>
+        <p>
+            Para obter uma taxa mensal equivalente a uma taxa anual,
+            a calculadora utiliza a equivalência de capitalização,
+            considerando 12 períodos mensais.
+        </p>
+    </details>
+
+    <details>
+        <summary>Os resultados representam o que vou ganhar em um investimento real?</summary>
+        <p>
+            Não necessariamente. O resultado é uma projeção matemática
+            baseada na taxa informada. Investimentos reais podem
+            apresentar custos, impostos, variações de rentabilidade,
+            inflação e outras condições.
+        </p>
+    </details>
+
+    <details>
+        <summary>Quanto maior o prazo, maior será o resultado?</summary>
+        <p>
+            Mantendo as demais condições constantes e utilizando uma
+            taxa positiva, um prazo maior tende a aumentar o patrimônio
+            projetado. Entretanto, isso é uma característica matemática
+            da simulação e não uma garantia de rentabilidade futura.
+        </p>
+    </details>
+
+</section>
+
+<section class="card">
+
+    <h2>Continue sua simulação</h2>
+
+    <p>
+        Depois de calcular os juros compostos, você pode utilizar
+        outras ferramentas gratuitas do Calcula Fácil para comparar
+        diferentes situações financeiras.
+    </p>
+
+    <div class="links">
+
+        <a class="link-card" href="financiamento.html">
+            Calculadora de financiamento
+        </a>
+
+        <a class="link-card" href="juros-simples.html">
+            Calculadora de juros simples
+        </a>
+
+        <a class="link-card" href="investimentos.html">
+            Calculadora de investimentos
+        </a>
+
+    </div>
+
+</section>
+
+<section class="notice">
+
+    <strong>Importante:</strong>
+
+    Os resultados apresentados são estimativas matemáticas.
+    Eles não constituem recomendação financeira e não garantem
+    rentabilidade futura.
 
 </section>
 ```
 
 </main>
 
-<!-- FOOTER -->
-
-<footer class="site-footer">
+<footer>
 
 ```
-<div class="container">
+<div class="footer-inner">
 
-    <div class="footer-content">
+    <strong>Calcula Fácil</strong>
 
+    <p>
+        Ferramentas gratuitas para ajudar você a entender melhor
+        seus números e fazer simulações financeiras.
+    </p>
 
-        <div>
+    <div class="footer-links">
 
-            <h2>
-                Calcula Fácil
-            </h2>
+        <a href="juros-compostos.html">Juros compostos</a>
 
-            <p>
-                Ferramentas gratuitas para ajudar você a entender
-                melhor seus números e fazer simulações financeiras.
-            </p>
+        <a href="financiamento.html">Financiamento</a>
 
-        </div>
+        <a href="juros-simples.html">Juros simples</a>
 
+        <a href="investimentos.html">Investimentos</a>
 
-        <div>
+        <a href="sobre.html">Sobre</a>
 
-            <h3>
-                Calculadoras
-            </h3>
+        <a href="privacidade.html">Privacidade</a>
 
-            <a href="juros-compostos.html">
-                Juros compostos
-            </a>
+        <a href="termos.html">Termos de uso</a>
 
-            <a href="financiamento.html">
-                Financiamento
-            </a>
-
-            <a href="juros-simples.html">
-                Juros simples
-            </a>
-
-            <a href="investimento.html">
-                Investimentos
-            </a>
-
-        </div>
-
-
-        <div>
-
-            <h3>
-                Informações
-            </h3>
-
-            <a href="sobre.html">
-                Sobre
-            </a>
-
-            <a href="privacidade.html">
-                Privacidade
-            </a>
-
-            <a href="termos.html">
-                Termos de uso
-            </a>
-
-            <a href="contato.html">
-                Contato
-            </a>
-
-        </div>
-
+        <a href="contato.html">Contato</a>
 
     </div>
 
-
-    <p class="copyright">
-
-        © 2026 Calcula Fácil.
-        Os resultados apresentados são estimativas matemáticas
-        e não constituem recomendação financeira.
-
+    <p class="small">
+        © 2026 Calcula Fácil. Todos os direitos reservados.
     </p>
 
 </div>
@@ -831,24 +1114,466 @@
 
 </footer>
 
-<!-- JAVASCRIPT -->
-
-<script src="js/app.js"></script>
-
 <script>
+"use strict";
 
-document.addEventListener("DOMContentLoaded", function () {
+/*
+ * CALCULA FÁCIL
+ * Calculadora de Juros Compostos
+ *
+ * Regra da simulação:
+ * 1. O saldo inicial começa com o valor inicial.
+ * 2. Os juros são calculados sobre o saldo.
+ * 3. O aporte mensal é acrescentado ao final de cada mês.
+ * 4. Taxa anual é convertida para taxa mensal efetiva.
+ */
 
-    if (typeof calcCompound === "function") {
+const valorInicialEl = document.getElementById("valorInicial");
+const aporteMensalEl = document.getElementById("aporteMensal");
+const taxaEl = document.getElementById("taxa");
+const tipoTaxaEl = document.getElementById("tipoTaxa");
+const tempoEl = document.getElementById("tempo");
+const tipoTempoEl = document.getElementById("tipoTempo");
+const calcularBtn = document.getElementById("calcular");
 
-        calcCompound();
+const patrimonioFinalEl = document.getElementById("patrimonioFinal");
+const totalInvestidoEl = document.getElementById("totalInvestido");
+const totalJurosEl = document.getElementById("totalJuros");
 
+const tabelaCorpo = document.getElementById("tabelaCorpo");
+const erroEl = document.getElementById("erro");
+const canvas = document.getElementById("grafico");
+const ctx = canvas.getContext("2d");
+
+let dadosGrafico = [];
+
+function numero(valor) {
+    if (typeof valor !== "string") {
+        return Number(valor) || 0;
+    }
+
+    let texto = valor.trim();
+
+    if (!texto) {
+        return 0;
+    }
+
+    /*
+     * Aceita:
+     * 1000
+     * 1000,50
+     * 1.000,50
+     * 1000.50
+     */
+    if (texto.includes(",") && texto.includes(".")) {
+        texto = texto.replace(/\./g, "").replace(",", ".");
+    } else if (texto.includes(",")) {
+        texto = texto.replace(",", ".");
+    }
+
+    return Number(texto) || 0;
+}
+
+function moeda(valor) {
+    return Number(valor).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+function porcentagem(valor) {
+    return Number(valor).toLocaleString("pt-BR", {
+        minimumFractionDigits: 4,
+        maximumFractionDigits: 4
+    }) + "%";
+}
+
+function mostrarErro(mensagem) {
+    erroEl.textContent = mensagem;
+    erroEl.style.display = "block";
+}
+
+function esconderErro() {
+    erroEl.textContent = "";
+    erroEl.style.display = "none";
+}
+
+function obterTaxaMensal(taxa, tipo) {
+
+    if (tipo === "anual") {
+        /*
+         * Conversão de taxa anual efetiva para taxa mensal efetiva:
+         *
+         * (1 + taxa_anual)^(1/12) - 1
+         */
+        return Math.pow(1 + taxa, 1 / 12) - 1;
+    }
+
+    return taxa;
+}
+
+function calcular() {
+
+    esconderErro();
+
+    const valorInicial = numero(valorInicialEl.value);
+    const aporteMensal = numero(aporteMensalEl.value);
+    const taxaInformada = numero(taxaEl.value);
+    const tempo = Number(tempoEl.value);
+
+    if (!Number.isFinite(valorInicial) || valorInicial < 0) {
+        mostrarErro("Informe um valor inicial válido.");
+        return;
+    }
+
+    if (!Number.isFinite(aporteMensal) || aporteMensal < 0) {
+        mostrarErro("Informe um aporte mensal válido.");
+        return;
+    }
+
+    if (!Number.isFinite(taxaInformada) || taxaInformada < 0) {
+        mostrarErro("Informe uma taxa de juros válida.");
+        return;
+    }
+
+    if (!Number.isFinite(tempo) || tempo <= 0) {
+        mostrarErro("Informe um prazo maior que zero.");
+        return;
+    }
+
+    let meses;
+
+    if (tipoTempoEl.value === "anos") {
+        meses = Math.round(tempo * 12);
+    } else {
+        meses = Math.round(tempo);
+    }
+
+    if (meses < 1) {
+        mostrarErro("O prazo deve possuir pelo menos 1 mês.");
+        return;
+    }
+
+    /*
+     * Converte a taxa de porcentagem para decimal.
+     * Exemplo:
+     * 1% = 0.01
+     */
+    const taxaDecimal = taxaInformada / 100;
+
+    const taxaMensal = obterTaxaMensal(
+        taxaDecimal,
+        tipoTaxaEl.value
+    );
+
+    let saldo = valorInicial;
+    let totalAportes = valorInicial;
+    let jurosAcumulados = 0;
+
+    const dados = [];
+
+    /*
+     * Guarda o mês zero para o gráfico.
+     */
+    dados.push({
+        mes: 0,
+        patrimonio: saldo,
+        investido: valorInicial
+    });
+
+    for (let mes = 1; mes <= meses; mes++) {
+
+        /*
+         * Juros do mês sobre o saldo existente.
+         */
+        const jurosMes = saldo * taxaMensal;
+
+        /*
+         * Primeiro aplica os juros.
+         */
+        saldo += jurosMes;
+
+        /*
+         * Depois acrescenta o aporte.
+         */
+        saldo += aporteMensal;
+
+        jurosAcumulados += jurosMes;
+
+        totalAportes += aporteMensal;
+
+        dados.push({
+            mes: mes,
+            aporte: aporteMensal,
+            jurosMes: jurosMes,
+            jurosAcumulados: jurosAcumulados,
+            investido: totalAportes,
+            patrimonio: saldo
+        });
+    }
+
+    const patrimonioFinal = saldo;
+    const totalInvestido = totalAportes;
+    const totalJuros = patrimonioFinal - totalInvestido;
+
+    patrimonioFinalEl.textContent = moeda(patrimonioFinal);
+    totalInvestidoEl.textContent = moeda(totalInvestido);
+    totalJurosEl.textContent = moeda(totalJuros);
+
+    dadosGrafico = dados;
+
+    preencherTabela(dados);
+    desenharGrafico(dados);
+}
+
+function preencherTabela(dados) {
+
+    tabelaCorpo.innerHTML = "";
+
+    dados.slice(1).forEach((item) => {
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${item.mes}</td>
+            <td>${moeda(item.aporte)}</td>
+            <td>${moeda(item.jurosMes)}</td>
+            <td>${moeda(item.jurosAcumulados)}</td>
+            <td>${moeda(item.investido)}</td>
+            <td><strong>${moeda(item.patrimonio)}</strong></td>
+        `;
+
+        tabelaCorpo.appendChild(tr);
+    });
+}
+
+function ajustarCanvas() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const ratio = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+function desenharGrafico(dados) {
+
+    ajustarCanvas();
+
+    const largura = canvas.clientWidth;
+    const altura = canvas.clientHeight;
+
+    ctx.clearRect(0, 0, largura, altura);
+
+    if (!dados || dados.length < 2) {
+        return;
+    }
+
+    const margemEsquerda = 58;
+    const margemDireita = 20;
+    const margemSuperior = 25;
+    const margemInferior = 45;
+
+    const larguraGrafico =
+        largura - margemEsquerda - margemDireita;
+
+    const alturaGrafico =
+        altura - margemSuperior - margemInferior;
+
+    const valores = dados.map(item => item.patrimonio);
+
+    const maximo = Math.max(...valores, 1);
+
+    const minimo = 0;
+
+    function x(i) {
+        return margemEsquerda +
+            (i / (dados.length - 1)) * larguraGrafico;
+    }
+
+    function y(valor) {
+        return margemSuperior +
+            alturaGrafico -
+            ((valor - minimo) / (maximo - minimo)) * alturaGrafico;
+    }
+
+    /*
+     * Linhas horizontais.
+     */
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1;
+
+    for (let i = 0; i <= 4; i++) {
+
+        const valor = maximo * (i / 4);
+        const py = y(valor);
+
+        ctx.beginPath();
+        ctx.moveTo(margemEsquerda, py);
+        ctx.lineTo(largura - margemDireita, py);
+        ctx.stroke();
+
+        ctx.fillStyle = "#64748b";
+        ctx.font = "11px Arial";
+        ctx.textAlign = "right";
+        ctx.fillText(
+            moedaCompacta(valor),
+            margemEsquerda - 8,
+            py + 4
+        );
+    }
+
+    /*
+     * Linha do gráfico.
+     */
+    ctx.beginPath();
+
+    dados.forEach((item, i) => {
+
+        const px = x(i);
+        const py = y(item.patrimonio);
+
+        if (i === 0) {
+            ctx.moveTo(px, py);
+        } else {
+            ctx.lineTo(px, py);
+        }
+    });
+
+    ctx.strokeStyle = "#0f766e";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    /*
+     * Área abaixo da linha.
+     */
+    ctx.beginPath();
+
+    dados.forEach((item, i) => {
+
+        const px = x(i);
+        const py = y(item.patrimonio);
+
+        if (i === 0) {
+            ctx.moveTo(px, py);
+        } else {
+            ctx.lineTo(px, py);
+        }
+    });
+
+    ctx.lineTo(x(dados.length - 1), margemSuperior + alturaGrafico);
+    ctx.lineTo(x(0), margemSuperior + alturaGrafico);
+    ctx.closePath();
+
+    ctx.fillStyle = "rgba(15, 118, 110, 0.10)";
+    ctx.fill();
+
+    /*
+     * Pontos inicial e final.
+     */
+    const primeiro = dados[0];
+    const ultimo = dados[dados.length - 1];
+
+    ctx.fillStyle = "#0f766e";
+
+    ctx.beginPath();
+    ctx.arc(x(0), y(primeiro.patrimonio), 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(
+        x(dados.length - 1),
+        y(ultimo.patrimonio),
+        6,
+        0,
+        Math.PI * 2
+    );
+    ctx.fill();
+
+    /*
+     * Eixo X.
+     */
+    ctx.fillStyle = "#64748b";
+    ctx.font = "11px Arial";
+    ctx.textAlign = "center";
+
+    const marcadores = Math.min(6, dados.length);
+
+    for (let i = 0; i < marcadores; i++) {
+
+        const indice = Math.round(
+            (i / (marcadores - 1)) *
+            (dados.length - 1)
+        );
+
+        ctx.fillText(
+            "Mês " + dados[indice].mes,
+            x(indice),
+            altura - 15
+        );
+    }
+}
+
+function moedaCompacta(valor) {
+
+    if (valor >= 1000000) {
+        return "R$ " +
+            (valor / 1000000)
+                .toLocaleString("pt-BR", {
+                    maximumFractionDigits: 1
+                }) +
+            " mi";
+    }
+
+    if (valor >= 1000) {
+        return "R$ " +
+            (valor / 1000)
+                .toLocaleString("pt-BR", {
+                    maximumFractionDigits: 1
+                }) +
+            " mil";
+    }
+
+    return "R$ " +
+        valor.toLocaleString("pt-BR", {
+            maximumFractionDigits: 0
+        });
+}
+
+calcularBtn.addEventListener("click", calcular);
+
+window.addEventListener("resize", () => {
+
+    if (dadosGrafico.length > 1) {
+        desenharGrafico(dadosGrafico);
     }
 
 });
 
+/*
+ * Permite calcular pressionando Enter
+ * dentro dos campos.
+ */
+document.querySelectorAll("input, select").forEach((elemento) => {
+
+    elemento.addEventListener("keydown", (evento) => {
+
+        if (evento.key === "Enter") {
+            calcular();
+        }
+
+    });
+
+});
+
+/*
+ * Cálculo inicial para a página não aparecer vazia.
+ */
+calcular();
 </script>
 
 </body>
-
 </html>
