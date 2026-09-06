@@ -1,34 +1,438 @@
 <!doctype html>
+
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora de Aporte Mensal | Calcula Fácil</title>
-<meta name="description" content="Calculadoras financeiras gratuitas para simular juros, investimentos e financiamentos.">
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Calculadora de Aporte Mensal: Alcance sua Meta | Calcula Fácil</title>
+
+<meta name="description" content="Calcule quanto investir por mês para alcançar uma meta financeira. Informe seu objetivo, valor inicial, taxa mensal e prazo e veja o aporte mensal estimado.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://fercrislim.github.io/calcula-facil/investimento.html">
+
 <link rel="stylesheet" href="css/style.css">
 
-<!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google, sem alterar o código do anúncio. -->
+<!-- Open Graph -->
+
+<meta property="og:title" content="Calculadora de Aporte Mensal | Calcula Fácil">
+<meta property="og:description" content="Descubra quanto investir por mês para buscar uma meta financeira considerando valor inicial, taxa e prazo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fercrislim.github.io/calcula-facil/investimento.html">
+
+<!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google. -->
+
 </head>
+
 <body>
-<header><div class="container nav">
-<a class="logo" href="index.html">Calcula<span>Fácil</span></a>
-<nav>
+
+<header>
+
+<div class="container nav">
+
+<a class="logo" href="index.html" aria-label="Calcula Fácil - página inicial">
+Calcula<span>Fácil</span>
+</a>
+
+<nav aria-label="Navegação principal">
+
 <a href="juros-compostos.html">Juros compostos</a>
+
 <a href="financiamento.html">Financiamento</a>
+
 <a href="juros-simples.html">Juros simples</a>
+
 <a href="investimento.html">Investimentos</a>
+
 <a href="sobre.html">Sobre</a>
-</nav></div></header>
 
-<section><div class="container"><span class="badge">PLANEJAMENTO</span><h1>Calculadora de Aporte Mensal</h1><p class="lead">Estime quanto investir por mês para buscar uma determinada meta financeira.</p>
-<div class="card"><div class="form-grid"><div><label>Meta financeira (R$)</label><input id="meta" type="number" min="0" step=".01" value="50000"></div><div><label>Valor inicial (R$)</label><input id="inicial" type="number" min="0" step=".01" value="5000"></div><div><label>Taxa mensal (%)</label><input id="taxa" type="number" min="0" step=".01" value="0.8"></div><div><label>Prazo (meses)</label><input id="meses" type="number" min="1" step="1" value="60"></div></div><div class="actions"><button class="btn btn-primary" onclick="calcMeta()">Calcular</button></div></div>
-<div class="result-grid"><div class="result highlight"><small>Aporte mensal estimado</small><strong id="aporteNec">R$ 0,00</strong></div></div>
-<div class="ad-slot">Espaço publicitário</div>
-<div class="card article"><h2>Como usar a calculadora?</h2><p>Defina uma meta, informe o valor que você já possui, uma taxa mensal hipotética e o prazo. O resultado mostra um aporte mensal estimado para alcançar o valor informado.</p><p>Na prática, a rentabilidade pode variar. Por isso, considere cenários conservadores e não trate a simulação como promessa de retorno.</p></div></div></section>
+</nav>
 
-<footer><div class="container footer-grid">
-<div><h3>Calcula Fácil</h3><p>Ferramentas gratuitas para ajudar você a entender melhor seus números.</p></div>
-<div><h3>Calculadoras</h3><p><a href="juros-compostos.html">Juros compostos</a><br><a href="financiamento.html">Financiamento</a><br><a href="investimento.html">Investimentos</a></p></div>
-<div><h3>Informações</h3><p><a href="sobre.html">Sobre</a><br><a href="privacidade.html">Privacidade</a><br><a href="termos.html">Termos</a><br><a href="contato.html">Contato</a></p></div>
-</div><div class="container small">© 2026 Calcula Fácil. Os resultados são estimativas e não constituem recomendação financeira.</div></footer>
-<script src="js/app.js"></script><script>calcMeta();</script>
-</body></html>
+</div>
+
+</header>
+
+<main>
+
+<section>
+
+<div class="container">
+
+<span class="badge">PLANEJAMENTO FINANCEIRO</span>
+
+<h1>Calculadora de Aporte Mensal</h1>
+
+<p class="lead">
+Estime quanto investir por mês para buscar uma determinada meta financeira considerando o valor que você já possui, uma taxa de rendimento e o prazo desejado.
+</p>
+
+<div class="card">
+
+<h2>Calcule seu aporte mensal</h2>
+
+<p class="muted">
+Informe sua meta financeira e os valores da simulação para descobrir um aporte mensal estimado.
+</p>
+
+<div class="form-grid">
+
+<div>
+
+<label for="meta">
+Meta financeira (R$)
+</label>
+
+<input
+id="meta"
+type="number"
+min="0"
+step="0.01"
+value="50000"
+inputmode="decimal"
+
+>
+
+</div>
+
+<div>
+
+<label for="inicial">
+Valor inicial (R$)
+</label>
+
+<input
+id="inicial"
+type="number"
+min="0"
+step="0.01"
+value="5000"
+inputmode="decimal"
+
+>
+
+</div>
+
+<div>
+
+<label for="taxa">
+Taxa mensal (%)
+</label>
+
+<input
+id="taxa"
+type="number"
+min="0"
+step="0.01"
+value="0.8"
+inputmode="decimal"
+
+>
+
+</div>
+
+<div>
+
+<label for="meses">
+Prazo (meses)
+</label>
+
+<input
+id="meses"
+type="number"
+min="1"
+step="1"
+value="60"
+inputmode="numeric"
+
+>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn btn-primary"
+type="button"
+onclick="calcMeta()"
+
+>
+
+Calcular aporte mensal </button>
+
+</div>
+
+</div>
+
+<div class="result-grid">
+
+<div class="result highlight">
+
+<small>Aporte mensal estimado</small>
+
+<strong id="aporteNec">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+<div class="ad-slot" aria-label="Espaço publicitário">
+
+Espaço publicitário
+
+</div>
+
+<article class="card article">
+
+<h2>Como funciona a calculadora de aporte mensal?</h2>
+
+<p>
+A calculadora utiliza a meta financeira informada, o valor inicial disponível, a taxa mensal considerada na simulação e o prazo desejado para estimar quanto seria necessário investir mensalmente.
+</p>
+
+<p>
+O objetivo é ajudar a visualizar diferentes cenários de planejamento financeiro. O resultado não representa uma garantia de rentabilidade ou de retorno de um investimento real.
+</p>
+
+<h2>O que é um aporte mensal?</h2>
+
+<p>
+Aporte mensal é o valor investido periodicamente em uma aplicação ou estratégia financeira. Ele pode ser utilizado para aumentar gradualmente o patrimônio ao longo do tempo.
+</p>
+
+<p>
+Em uma simulação com juros compostos, os aportes realizados ao longo do período podem contribuir para o crescimento do patrimônio, juntamente com os rendimentos considerados na projeção.
+</p>
+
+<h2>Por que definir uma meta financeira?</h2>
+
+<p>
+Uma meta financeira transforma um objetivo em um valor que pode ser planejado. Pode ser, por exemplo, acumular determinado patrimônio, formar uma reserva ou juntar dinheiro para uma compra futura.
+</p>
+
+<p>
+Ao definir o valor desejado e um prazo, fica mais fácil estimar quanto seria necessário guardar ou investir periodicamente.
+</p>
+
+<h2>O prazo influencia o aporte mensal?</h2>
+
+<p>
+Sim. Mantendo os demais valores constantes, um prazo maior pode permitir que o objetivo seja alcançado com aportes mensais menores, pois o dinheiro permanece aplicado por mais tempo e os rendimentos considerados na simulação têm mais períodos para atuar.
+</p>
+
+<p>
+Isso não significa que aumentar o prazo seja sempre a melhor escolha. É importante considerar o objetivo, a capacidade de investimento e as características do investimento escolhido.
+</p>
+
+<h2>Como a taxa de rendimento influencia o resultado?</h2>
+
+<p>
+A taxa utilizada na calculadora representa uma hipótese para a simulação. Alterar essa taxa pode mudar significativamente o aporte mensal estimado necessário para alcançar a meta.
+</p>
+
+<p>
+Por isso, é interessante testar diferentes cenários e evitar utilizar uma taxa de rendimento elevada como se fosse garantida.
+</p>
+
+<h2>O que acontece se a rentabilidade for menor?</h2>
+
+<p>
+Se o rendimento efetivamente obtido for inferior ao utilizado na simulação, o patrimônio acumulado poderá ficar abaixo da meta. Nesse caso, pode ser necessário aumentar os aportes, ampliar o prazo ou revisar o objetivo.
+</p>
+
+<p>
+Por esse motivo, o planejamento deve considerar cenários diferentes e uma margem de segurança adequada à realidade de cada pessoa.
+</p>
+
+<h2>Esta calculadora garante que a meta será alcançada?</h2>
+
+<p>
+Não. O resultado é uma estimativa matemática baseada nos dados informados. Investimentos reais podem apresentar variações de rentabilidade, impostos, taxas, inflação e outros custos.
+</p>
+
+<p>
+Utilize a calculadora como uma ferramenta de planejamento e comparação de cenários, e não como promessa de resultado futuro.
+</p>
+
+<h2>Perguntas frequentes sobre aporte mensal</h2>
+
+<h3>Como calcular quanto preciso investir por mês?</h3>
+
+<p>
+É necessário considerar a meta financeira, o valor que você já possui, o prazo disponível e uma hipótese de rendimento. A calculadora utiliza essas informações para estimar o aporte mensal.
+</p>
+
+<h3>Posso começar com um valor inicial?</h3>
+
+<p>
+Sim. Informe o valor que você já possui no campo de valor inicial. A ferramenta considera esse valor na simulação da meta.
+</p>
+
+<h3>Quanto maior o prazo, menor será o aporte?</h3>
+
+<p>
+Em uma simulação com as mesmas condições e uma taxa positiva, aumentar o prazo tende a reduzir o aporte periódico necessário. Porém, isso é uma projeção matemática e não uma garantia de resultado.
+</p>
+
+<h3>Posso usar qualquer taxa mensal?</h3>
+
+<p>
+Você pode testar diferentes taxas na calculadora, mas é importante utilizar uma hipótese realista. A rentabilidade de um investimento real pode variar e não deve ser tratada como garantida.
+</p>
+
+<h3>O resultado considera inflação?</h3>
+
+<p>
+Não. A calculadora apresenta uma projeção com base nos valores informados e não ajusta automaticamente a meta pela inflação.
+</p>
+
+<h3>O resultado considera impostos e taxas?</h3>
+
+<p>
+Não necessariamente. A simulação é matemática e pode não representar custos específicos de uma aplicação real, como impostos, taxas de administração ou outras despesas.
+</p>
+
+</article>
+
+<section class="article">
+
+<h2>Veja também outras calculadoras</h2>
+
+<p>
+Depois de calcular seu aporte mensal, você pode comparar o resultado utilizando outras ferramentas gratuitas do Calcula Fácil.
+</p>
+
+<p>
+
+<a href="juros-compostos.html">
+Calculadora de juros compostos
+</a>
+
+<br>
+
+<a href="juros-simples.html">
+Calculadora de juros simples
+</a>
+
+<br>
+
+<a href="financiamento.html">
+Calculadora de financiamento
+</a>
+
+</p>
+
+</section>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="container footer-grid">
+
+<div>
+
+<h2>Calcula Fácil</h2>
+
+<p>
+Ferramentas gratuitas para ajudar você a entender melhor seus números e fazer simulações financeiras.
+</p>
+
+</div>
+
+<div>
+
+<h3>Calculadoras</h3>
+
+<p>
+
+<a href="juros-compostos.html">
+Juros compostos
+</a>
+
+<br>
+
+<a href="financiamento.html">
+Financiamento
+</a>
+
+<br>
+
+<a href="juros-simples.html">
+Juros simples
+</a>
+
+<br>
+
+<a href="investimento.html">
+Investimentos
+</a>
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Informações</h3>
+
+<p>
+
+<a href="sobre.html">
+Sobre
+</a>
+
+<br>
+
+<a href="privacidade.html">
+Privacidade
+</a>
+
+<br>
+
+<a href="termos.html">
+Termos de uso
+</a>
+
+<br>
+
+<a href="contato.html">
+Contato
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="container small">
+
+© 2026 Calcula Fácil.
+Os resultados apresentados são estimativas matemáticas e não constituem recomendação financeira.
+
+</div>
+
+</footer>
+
+<script src="js/app.js"></script>
+
+<script>
+calcMeta();
+</script>
+
+</body>
+
+</html>
