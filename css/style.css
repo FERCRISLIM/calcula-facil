@@ -63,3 +63,33 @@ footer a{color:#fff;text-decoration:none}
  .hero{padding-top:35px}
  .card{padding:18px}
 }
+.formula-box {
+    margin: 30px 0;
+    padding: 25px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+}
+
+.formula-box h3 {
+    margin-top: 0;
+}
+
+.formula {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.formula-box ul {
+    padding-left: 25px;
+}
+
+.formula-box li {
+    margin-bottom: 8px;
+}
