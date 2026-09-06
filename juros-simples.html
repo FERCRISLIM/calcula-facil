@@ -1,34 +1,448 @@
 <!doctype html>
+
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculadora de Juros Simples | Calcula Fácil</title>
-<meta name="description" content="Calculadoras financeiras gratuitas para simular juros, investimentos e financiamentos.">
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Calculadora de Juros Simples: Calcule Juros e Montante | Calcula Fácil</title>
+
+<meta name="description" content="Calcule juros simples e montante gratuitamente. Informe o capital, a taxa por período e o número de períodos e veja o resultado da simulação.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://fercrislim.github.io/calcula-facil/juros-simples.html">
+
 <link rel="stylesheet" href="css/style.css">
 
-<!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google, sem alterar o código do anúncio. -->
+<!-- Open Graph -->
+
+<meta property="og:title" content="Calculadora de Juros Simples | Calcula Fácil">
+<meta property="og:description" content="Calcule juros e montante de uma operação com juros simples de forma rápida e gratuita.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fercrislim.github.io/calcula-facil/juros-simples.html">
+
+<!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google. -->
+
 </head>
+
 <body>
-<header><div class="container nav">
-<a class="logo" href="index.html">Calcula<span>Fácil</span></a>
-<nav>
+
+<header>
+
+<div class="container nav">
+
+<a class="logo" href="index.html" aria-label="Calcula Fácil - página inicial">
+Calcula<span>Fácil</span>
+</a>
+
+<nav aria-label="Navegação principal">
+
 <a href="juros-compostos.html">Juros compostos</a>
+
 <a href="financiamento.html">Financiamento</a>
+
 <a href="juros-simples.html">Juros simples</a>
+
 <a href="investimento.html">Investimentos</a>
+
 <a href="sobre.html">Sobre</a>
-</nav></div></header>
 
-<section><div class="container"><span class="badge">SIMULADOR</span><h1>Calculadora de Juros Simples</h1><p class="lead">Calcule rapidamente os juros e o montante de uma operação de juros simples.</p>
-<div class="card"><div class="form-grid"><div><label>Capital inicial (R$)</label><input id="capital" type="number" min="0" step=".01" value="1000"></div><div><label>Taxa por período (%)</label><input id="taxa" type="number" min="0" step=".01" value="2"></div><div><label>Número de períodos</label><input id="tempo" type="number" min="0" step="1" value="12"></div></div><div class="actions"><button class="btn btn-primary" onclick="calcSimple()">Calcular</button></div></div>
-<div class="result-grid"><div class="result highlight"><small>Montante</small><strong id="montante">R$ 0,00</strong></div><div class="result"><small>Juros</small><strong id="jurosSimples">R$ 0,00</strong></div></div>
-<div class="ad-slot">Espaço publicitário</div>
-<div class="card article"><h2>Juros simples x juros compostos</h2><p>Nos juros simples, o cálculo do juro de cada período usa o capital inicial. Nos juros compostos, o saldo acumulado participa dos cálculos seguintes.</p></div></div></section>
+</nav>
 
-<footer><div class="container footer-grid">
-<div><h3>Calcula Fácil</h3><p>Ferramentas gratuitas para ajudar você a entender melhor seus números.</p></div>
-<div><h3>Calculadoras</h3><p><a href="juros-compostos.html">Juros compostos</a><br><a href="financiamento.html">Financiamento</a><br><a href="investimento.html">Investimentos</a></p></div>
-<div><h3>Informações</h3><p><a href="sobre.html">Sobre</a><br><a href="privacidade.html">Privacidade</a><br><a href="termos.html">Termos</a><br><a href="contato.html">Contato</a></p></div>
-</div><div class="container small">© 2026 Calcula Fácil. Os resultados são estimativas e não constituem recomendação financeira.</div></footer>
-<script src="js/app.js"></script><script>calcSimple();</script>
-</body></html>
+</div>
+
+</header>
+
+<main>
+
+<section>
+
+<div class="container">
+
+<span class="badge">CALCULADORA FINANCEIRA</span>
+
+<h1>Calculadora de Juros Simples</h1>
+
+<p class="lead">
+Calcule gratuitamente os juros e o montante de uma operação de juros simples informando o capital inicial, a taxa por período e o número de períodos.
+</p>
+
+<div class="card">
+
+<h2>Faça sua simulação</h2>
+
+<p class="muted">
+Informe os dados abaixo para calcular o valor dos juros e o montante final.
+</p>
+
+<div class="form-grid">
+
+<div>
+
+<label for="capital">
+Capital inicial (R$)
+</label>
+
+<input
+id="capital"
+type="number"
+min="0"
+step="0.01"
+value="1000"
+inputmode="decimal"
+
+>
+
+</div>
+
+<div>
+
+<label for="taxa">
+Taxa por período (%)
+</label>
+
+<input
+id="taxa"
+type="number"
+min="0"
+step="0.01"
+value="2"
+inputmode="decimal"
+
+>
+
+</div>
+
+<div>
+
+<label for="tempo">
+Número de períodos
+</label>
+
+<input
+id="tempo"
+type="number"
+min="0"
+step="1"
+value="12"
+inputmode="numeric"
+
+>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn btn-primary"
+type="button"
+onclick="calcSimple()"
+
+>
+
+Calcular juros simples </button>
+
+</div>
+
+</div>
+
+<div class="result-grid">
+
+<div class="result highlight">
+
+<small>Montante</small>
+
+<strong id="montante">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="result">
+
+<small>Juros</small>
+
+<strong id="jurosSimples">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+<div class="ad-slot" aria-label="Espaço publicitário">
+
+Espaço publicitário
+
+</div>
+
+<article class="card article">
+
+<h2>O que são juros simples?</h2>
+
+<p>
+Juros simples são calculados sempre sobre o capital inicial da operação. Diferentemente dos juros compostos, os juros acumulados não são incorporados ao capital utilizado para calcular os juros dos períodos seguintes.
+</p>
+
+<p>
+Por isso, mantendo a mesma taxa e o mesmo capital inicial, o valor dos juros de cada período permanece constante.
+</p>
+
+<h2>Como calcular juros simples?</h2>
+
+<p>
+Para calcular juros simples, são considerados três elementos principais: o capital inicial, a taxa de juros e o número de períodos.
+</p>
+
+<p>
+O resultado da operação permite identificar o valor dos juros acumulados e o montante, que corresponde ao capital inicial somado aos juros.
+</p>
+
+<h2>O que é capital inicial?</h2>
+
+<p>
+Capital inicial é o valor utilizado como base para a operação financeira. Em uma aplicação, por exemplo, pode representar o valor inicialmente investido. Em uma operação de crédito, pode representar o valor principal considerado no cálculo.
+</p>
+
+<h2>O que significa taxa por período?</h2>
+
+<p>
+A taxa por período representa o percentual utilizado no cálculo de cada período. É importante que a taxa e o número de períodos estejam na mesma unidade de tempo.
+</p>
+
+<p>
+Por exemplo, se a taxa informada corresponde a um mês, o número de períodos deve representar meses. Se a taxa corresponde a um ano, os períodos devem ser informados em anos.
+</p>
+
+<h2>O que é montante?</h2>
+
+<p>
+Montante é o valor total ao final da operação, considerando o capital inicial e os juros acumulados.
+</p>
+
+<p>
+Em uma simulação de juros simples, o montante é formado pela soma do capital inicial com os juros calculados durante o período informado.
+</p>
+
+<h2>Juros simples x juros compostos</h2>
+
+<p>
+A principal diferença está na base utilizada para calcular os juros.
+</p>
+
+<p>
+Nos <strong>juros simples</strong>, os juros de cada período são calculados sobre o capital inicial.
+</p>
+
+<p>
+Nos <strong>juros compostos</strong>, os juros acumulados são incorporados ao saldo e passam a participar dos cálculos dos períodos seguintes.
+</p>
+
+<p>
+Por isso, os dois regimes podem produzir resultados diferentes, especialmente quando o período da operação é maior.
+</p>
+
+<h2>Quando os juros simples podem ser utilizados?</h2>
+
+<p>
+Os juros simples podem aparecer em determinadas operações financeiras, cálculos escolares, negociações e situações em que o método de cálculo estabelecido utiliza esse regime.
+</p>
+
+<p>
+Em operações financeiras reais, entretanto, é importante verificar as condições específicas do contrato ou da instituição responsável, pois diferentes produtos podem utilizar métodos de cálculo distintos.
+</p>
+
+<h2>Como interpretar o resultado da calculadora?</h2>
+
+<p>
+O resultado apresentado em <strong>Montante</strong> representa o valor final estimado da operação.
+</p>
+
+<p>
+O resultado apresentado em <strong>Juros</strong> representa o valor acumulado dos juros durante os períodos informados.
+</p>
+
+<p>
+A simulação é baseada exclusivamente nos valores informados pelo usuário e não considera automaticamente taxas adicionais, impostos, tarifas ou outras condições contratuais.
+</p>
+
+<h2>Perguntas frequentes sobre juros simples</h2>
+
+<h3>O que são juros simples?</h3>
+
+<p>
+São juros calculados sobre o capital inicial durante cada período da operação.
+</p>
+
+<h3>Qual a diferença entre juros simples e compostos?</h3>
+
+<p>
+Nos juros simples, o cálculo utiliza o capital inicial como base. Nos juros compostos, os juros acumulados passam a fazer parte do saldo utilizado nos períodos seguintes.
+</p>
+
+<h3>O que é montante?</h3>
+
+<p>
+Montante é o valor total da operação ao final do período, considerando o capital inicial e os juros acumulados.
+</p>
+
+<h3>A taxa e o período precisam estar na mesma unidade?</h3>
+
+<p>
+Sim. A taxa deve corresponder à unidade utilizada para os períodos informados. Uma taxa mensal, por exemplo, deve ser utilizada com períodos mensais.
+</p>
+
+<h3>Esta calculadora pode ser utilizada para qualquer financiamento?</h3>
+
+<p>
+Não necessariamente. Financiamentos podem utilizar diferentes sistemas de amortização e incluir custos adicionais. Para uma simulação de financiamento, utilize a calculadora específica do Calcula Fácil.
+</p>
+
+<h3>O resultado é igual ao de uma operação financeira real?</h3>
+
+<p>
+Não necessariamente. O resultado é uma estimativa matemática baseada nos dados informados. Operações reais podem incluir impostos, tarifas, seguros e outras condições.
+</p>
+
+</article>
+
+<section class="article">
+
+<h2>Continue sua simulação</h2>
+
+<p>
+O Calcula Fácil possui outras ferramentas gratuitas para ajudar você a comparar diferentes situações financeiras.
+</p>
+
+<p>
+
+<a href="juros-compostos.html">
+Calculadora de juros compostos
+</a>
+
+<br>
+
+<a href="financiamento.html">
+Calculadora de financiamento
+</a>
+
+<br>
+
+<a href="investimento.html">
+Calculadora de investimentos
+</a>
+
+</p>
+
+</section>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="container footer-grid">
+
+<div>
+
+<h2>Calcula Fácil</h2>
+
+<p>
+Ferramentas gratuitas para ajudar você a entender melhor seus números e fazer simulações financeiras.
+</p>
+
+</div>
+
+<div>
+
+<h3>Calculadoras</h3>
+
+<p>
+
+<a href="juros-compostos.html">
+Juros compostos
+</a>
+
+<br>
+
+<a href="financiamento.html">
+Financiamento
+</a>
+
+<br>
+
+<a href="juros-simples.html">
+Juros simples
+</a>
+
+<br>
+
+<a href="investimento.html">
+Investimentos
+</a>
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Informações</h3>
+
+<p>
+
+<a href="sobre.html">
+Sobre
+</a>
+
+<br>
+
+<a href="privacidade.html">
+Privacidade
+</a>
+
+<br>
+
+<a href="termos.html">
+Termos de uso
+</a>
+
+<br>
+
+<a href="contato.html">
+Contato
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="container small">
+
+© 2026 Calcula Fácil.
+Os resultados apresentados são estimativas matemáticas e não constituem recomendação financeira.
+
+</div>
+
+</footer>
+
+<script src="js/app.js"></script>
+
+<script>
+calcSimple();
+</script>
+
+</body>
+
+</html>
