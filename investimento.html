@@ -1,34 +1,369 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Calculadora de Aporte Mensal | Calcula Fácil</title>
 <meta name="description" content="Calculadoras financeiras gratuitas para simular juros, investimentos e financiamentos.">
 <link rel="stylesheet" href="css/style.css">
+<!-- Importando Chart.js para o Gráfico -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    /* Estilos complementares padronizados com a outra calculadora */
+    :root {
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .input-group input, .input-group select {
+        padding: 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .input-group input:focus {
+        border-color: var(--primary);
+    }
+
+    /* Summary Cards */
+    .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .card-item {
+        background: #f1f5f9;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        border-left: 4px solid var(--primary);
+    }
+
+    .card-item h3 {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    .card-item p {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin: 0;
+        color: var(--primary);
+    }
+
+    /* Chart Container */
+    .chart-container {
+        position: relative;
+        height: 380px;
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    /* Table Container */
+    .table-container {
+        margin-top: 40px;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.95rem;
+    }
+
+    th, td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+        background-color: #f8fafc;
+        font-weight: 600;
+    }
+
+    tbody tr:hover {
+        background-color: #f8fafc;
+    }
+</style>
 
 <!-- ADSENSE: depois da aprovação, cole aqui o código fornecido pelo Google, sem alterar o código do anúncio. -->
 </head>
 <body>
-<header><div class="container nav">
-<a class="logo" href="index.html">Calcula<span>Fácil</span></a>
-<nav>
-<a href="juros-compostos.html">Juros compostos</a>
-<a href="financiamento.html">Financiamento</a>
-<a href="juros-simples.html">Juros simples</a>
-<a href="investimento.html">Investimentos</a>
-<a href="sobre.html">Sobre</a>
-</nav></div></header>
+<header>
+    <div class="container nav">
+        <a class="logo" href="index.html">Calcula<span>Fácil</span></a>
+        <nav>
+            <a href="juros-compostos.html">Juros compostos</a>
+            <a href="financiamento.html">Financiamento</a>
+            <a href="juros-simples.html">Juros simples</a>
+            <a href="investimento.html">Investimentos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </div>
+</header>
 
-<section><div class="container"><span class="badge">PLANEJAMENTO</span><h1>Calculadora de Aporte Mensal</h1><p class="lead">Estime quanto investir por mês para buscar uma determinada meta financeira.</p>
-<div class="card"><div class="form-grid"><div><label>Meta financeira (R$)</label><input id="meta" type="number" min="0" step=".01" value="50000"></div><div><label>Valor inicial (R$)</label><input id="inicial" type="number" min="0" step=".01" value="5000"></div><div><label>Taxa mensal (%)</label><input id="taxa" type="number" min="0" step=".01" value="0.8"></div><div><label>Prazo (meses)</label><input id="meses" type="number" min="1" step="1" value="60"></div></div><div class="actions"><button class="btn btn-primary" onclick="calcMeta()">Calcular</button></div></div>
-<div class="result-grid"><div class="result highlight"><small>Aporte mensal estimado</small><strong id="aporteNec">R$ 0,00</strong></div></div>
-<div class="ad-slot">Espaço publicitário</div>
-<div class="card article"><h2>Como usar a calculadora?</h2><p>Defina uma meta, informe o valor que você já possui, uma taxa mensal hipotética e o prazo. O resultado mostra um aporte mensal estimado para alcançar o valor informado.</p><p>Na prática, a rentabilidade pode variar. Por isso, considere cenários conservadores e não trate a simulação como promessa de retorno.</p></div></div></section>
+<section>
+    <div class="container">
+        <span class="badge">PLANEJAMENTO</span>
+        <h1>Calculadora de Aporte Mensal</h1>
+        <p class="lead">Estime quanto investir por mês para buscar uma determinada meta financeira.</p>
+        
+        <div class="card">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="meta">Meta financeira (R$)</label>
+                    <input id="meta" type="number" min="0" step="100" value="50000" oninput="calcMeta()">
+                </div>
+                <div class="input-group">
+                    <label for="inicial">Valor inicial (R$)</label>
+                    <input id="inicial" type="number" min="0" step="100" value="5000" oninput="calcMeta()">
+                </div>
+                <div class="input-group">
+                    <label for="taxa">Taxa mensal (%)</label>
+                    <input id="taxa" type="number" min="0" step="0.1" value="0.8" oninput="calcMeta()">
+                </div>
+                <div class="input-group">
+                    <label for="meses">Prazo (meses)</label>
+                    <input id="meses" type="number" min="1" step="1" value="60" oninput="calcMeta()">
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="calcMeta()">Calcular</button>
+            </div>
+        </div>
 
-<footer><div class="container footer-grid">
-<div><h3>Calcula Fácil</h3><p>Ferramentas gratuitas para ajudar você a entender melhor seus números.</p></div>
-<div><h3>Calculadoras</h3><p><a href="juros-compostos.html">Juros compostos</a><br><a href="financiamento.html">Financiamento</a><br><a href="investimento.html">Investimentos</a></p></div>
-<div><h3>Informações</h3><p><a href="sobre.html">Sobre</a><br><a href="privacidade.html">Privacidade</a><br><a href="termos.html">Termos</a><br><a href="contato.html">Contato</a></p></div>
-</div><div class="container small">© 2026 Calcula Fácil. Os resultados são estimativas e não constituem recomendação financeira.</div></footer>
-<script src="js/app.js"></script><script>calcMeta();</script>
-</body></html>
+        <!-- Seção de Resultados Estilizada -->
+        <div class="results-section" style="margin-top: 30px;">
+            <div class="summary-cards">
+                <div class="card-item">
+                    <h3>Aporte Mensal Estimado</h3>
+                    <p id="aporteNec">R$ 0,00</p>
+                </div>
+                <div class="card-item" style="border-left-color: #10b981;">
+                    <h3>Total Investido</h3>
+                    <p id="total-invested" style="color: #10b981;">R$ 0,00</p>
+                </div>
+                <div class="card-item" style="border-left-color: #f59e0b;">
+                    <h3>Total em Juros</h3>
+                    <p id="total-interest" style="color: #f59e0b;">R$ 0,00</p>
+                </div>
+            </div>
+
+            <!-- Gráfico Interativo -->
+            <div class="chart-container">
+                <canvas id="aporteChart"></canvas>
+            </div>
+
+            <!-- Tabela Mês a Mês -->
+            <div class="table-container">
+                <h2>Evolução Mês a Mês</h2>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Mês</th>
+                            <th>Aporte do Mês</th>
+                            <th>Total Investido</th>
+                            <th>Juros do Mês</th>
+                            <th>Total em Juros</th>
+                            <th>Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Preenchido via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ad-slot" style="margin-top: 30px;">Espaço publicitário</div>
+        
+        <div class="card article" style="margin-top: 30px;">
+            <h2>Como usar a calculadora?</h2>
+            <p>Defina uma meta, informe o valor que você já possui, uma taxa mensal hipotética e o prazo. O resultado mostra um aporte mensal estimado para alcançar o valor informado.</p>
+            <p>Na prática, a rentabilidade pode variar. Por isso, considere cenários conservadores e não trate a simulação como promessa de retorno.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-grid">
+        <div><h3>Calcula Fácil</h3><p>Ferramentas gratuitas para ajudar você a entender melhor seus números.</p></div>
+        <div><h3>Calculadoras</h3><p><a href="juros-compostos.html">Juros compostos</a><br><a href="financiamento.html">Financiamento</a><br><a href="investimento.html">Investimentos</a></p></div>
+        <div><h3>Informações</h3><p><a href="sobre.html">Sobre</a><br><a href="privacidade.html">Privacidade</a><br><a href="termos.html">Termos</a><br><a href="contato.html">Contato</a></p></div>
+    </div>
+    <div class="container small">© 2026 Calcula Fácil. Os resultados são estimativas e não constituem recomendação financeira.</div>
+</footer>
+
+<script>
+    let aporteChart = null;
+
+    function calcMeta() {
+        const meta = parseFloat(document.getElementById('meta').value) || 0;
+        const inicial = parseFloat(document.getElementById('inicial').value) || 0;
+        const taxaInput = parseFloat(document.getElementById('taxa').value) || 0;
+        const meses = parseInt(document.getElementById('meses').value) || 1;
+
+        const i = taxaInput / 100;
+
+        // Fórmula matemática para encontrar o PMT (Aporte Mensal necessário para atingir a meta)
+        // FV = PV * (1 + i)^n + PMT * [((1 + i)^n - 1) / i]
+        // Isolando o PMT:
+        let aporte = 0;
+        if (i === 0) {
+            aporte = (meta - inicial) / meses;
+            if (aporte < 0) aporte = 0;
+        } else {
+            const fator = Math.pow(1 + i, meses);
+            aporte = (meta - (inicial * fator)) * i / (fator - 1);
+            if (aporte < 0) aporte = 0;
+        }
+
+        // Simulação mês a mês para popular a tabela e o gráfico com o aporte calculado
+        let currentTotal = inicial;
+        let totalInvested = inicial;
+        let totalInterest = 0;
+
+        const labels = ['Mês 0'];
+        const dataTotal = [inicial];
+        const dataInvested = [inicial];
+        const dataInterest = [0];
+
+        const tableBody = document.querySelector('#results-table tbody');
+        let tableRows = `
+            <tr>
+                <td>0</td>
+                <td>R$ 0,00</td>
+                <td>R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td>R$ 0,00</td>
+                <td>R$ 0,00</td>
+                <td>R$ ${currentTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            </tr>
+        `;
+
+        for (let m = 1; m <= meses; m++) {
+            const interestMonth = currentTotal * i;
+            currentTotal += interestMonth + aporte;
+            totalInvested += aporte;
+            totalInterest += interestMonth;
+
+            labels.push(`Mês ${m}`);
+            dataTotal.push(currentTotal);
+            dataInvested.push(totalInvested);
+            dataInterest.push(totalInterest);
+
+            tableRows += `
+                <tr>
+                    <td>${m}</td>
+                    <td>R$ ${aporte.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${interestMonth.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${currentTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                </tr>
+            `;
+        }
+
+        tableBody.innerHTML = tableRows;
+
+        // Atualiza os cards de resultados
+        document.getElementById('aporteNec').innerText = `R$ ${aporte.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('total-invested').innerText = `R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('total-interest').innerText = `R$ ${totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // Renderiza o Gráfico
+        renderChart(labels, dataTotal, dataInvested, dataInterest);
+    }
+
+    function renderChart(labels, dataTotal, dataInvested, dataInterest) {
+        const ctx = document.getElementById('aporteChart').getContext('2d');
+        
+        if (aporteChart) {
+            aporteChart.destroy();
+        }
+
+        aporteChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Valor Total (R$)',
+                        data: dataTotal,
+                        borderColor: '#4f46e5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Total Investido (R$)',
+                        data: dataInvested,
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        borderDash: [5, 5],
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Total em Juros (R$)',
+                        data: dataInterest,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Executa ao carregar a página
+    window.onload = calcMeta;
+</script>
+
+</body>
+</html>
