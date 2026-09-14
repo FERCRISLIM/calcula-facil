@@ -1,46 +1,389 @@
-<!-- Seção de Resultados -->
-<section class="results-section">
-    <h2>Resultados da Simulação</h2>
-    <div class="summary-cards">
-        <div class="card">
-            <h3>Valor Total Acumulado</h3>
-            <p id="total-accumulated">R$ 0,00</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Juros Compostos</title>
+    <!-- Importando Chart.js para o Gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin-top: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .input-group input, .input-group select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-calculate {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .btn-calculate:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+        }
+
+        .card h3 {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 380px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* Table Container */
+        .table-container {
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Juros Compostos</h1>
+
+    <!-- Formulário de Entrada -->
+    <div class="form-grid">
+        <div class="input-group">
+            <label for="initial-amount">Valor Inicial (R$)</label>
+            <input type="number" id="initial-amount" value="1000" step="100">
         </div>
-        <div class="card">
-            <h3>Total Investido</h3>
-            <p id="total-invested">R$ 0,00</p>
+        <div class="input-group">
+            <label for="monthly-contribution">Aporte Mensal (R$)</label>
+            <input type="number" id="monthly-contribution" value="300" step="50">
         </div>
-        <div class="card">
-            <h3>Total em Juros</h3>
-            <p id="total-interest">R$ 0,00</p>
+        <div class="input-group">
+            <label for="interest-rate">Taxa de Juros</label>
+            <input type="number" id="interest-rate" value="1" step="0.1">
+        </div>
+        <div class="input-group">
+            <label for="rate-type">Tipo da Taxa</label>
+            <select id="rate-type">
+                <option value="monthly">Mensal</option>
+                <option value="yearly">Anual</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="time-period">Prazo</label>
+            <input type="number" id="time-period" value="5" step="1">
+        </div>
+        <div class="input-group">
+            <label for="period-type">Tipo do Prazo</label>
+            <select id="period-type">
+                <option value="years">Anos</option>
+                <option value="months">Meses</option>
+            </select>
         </div>
     </div>
 
-    <!-- Container do Gráfico -->
-    <div class="chart-container" style="position: relative; height:400px; width:100%; margin-top: 30px;">
-        <canvas id="compoundChart"></canvas>
-    </div>
+    <button class="btn-calculate" onclick="calculateAndRender()">Calcular</button>
 
-    <!-- Tabela Mês a Mês -->
-    <div class="table-container" style="margin-top: 40px; overflow-x: auto;">
-        <h3>Evolução Mês a Mês</h3>
-        <table id="results-table" style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-                <tr style="border-bottom: 2px solid #ccc;">
-                    <th style="padding: 10px;">Mês</th>
-                    <th style="padding: 10px;">Valor Aplicado no Mês</th>
-                    <th style="padding: 10px;">Total Investido</th>
-                    <th style="padding: 10px;">Juros do Mês</th>
-                    <th style="padding: 10px;">Total em Juros</th>
-                    <th style="padding: 10px;">Valor Total</th>
+    <!-- Resultados -->
+    <section class="results-section">
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Valor Total Acumulado</h3>
+                <p id="total-accumulated">R$ 0,00</p>
+            </div>
+            <div class="card" style="border-left-color: #10b981;">
+                <h3>Total Investido</h3>
+                <p id="total-invested" style="color: #10b981;">R$ 0,00</p>
+            </div>
+            <div class="card" style="border-left-color: #f59e0b;">
+                <h3>Total em Juros</h3>
+                <p id="total-interest" style="color: #f59e0b;">R$ 0,00</p>
+            </div>
+        </div>
+
+        <!-- Gráfico -->
+        <div class="chart-container">
+            <canvas id="compoundChart"></canvas>
+        </div>
+
+        <!-- Tabela -->
+        <div class="table-container">
+            <h2>Evolução Mês a Mês</h2>
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Aporte do Mês</th>
+                        <th>Total Investido</th>
+                        <th>Juros do Mês</th>
+                        <th>Total em Juros</th>
+                        <th>Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Preenchido via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    let compoundChart = null;
+
+    function calculateAndRender() {
+        const initialAmount = parseFloat(document.getElementById('initial-amount').value) || 0;
+        const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+        const interestRateInput = parseFloat(document.getElementById('interest-rate').value) || 0;
+        const rateType = document.getElementById('rate-type').value;
+        const timePeriodInput = parseFloat(document.getElementById('time-period').value) || 0;
+        const periodType = document.getElementById('period-type').value;
+
+        // Converte o período total para meses
+        const totalMonths = periodType === 'years' ? Math.round(timePeriodInput * 12) : Math.round(timePeriodInput);
+        
+        // Define a taxa mensal dependendo se o usuário escolheu taxa mensal ou anual
+        let monthlyRate = 0;
+        if (rateType === 'yearly') {
+            monthlyRate = Math.pow(1 + (interestRateInput / 100), 1 / 12) - 1;
+        } else {
+            monthlyRate = interestRateInput / 100;
+        }
+
+        let currentTotal = initialAmount;
+        let totalInvested = initialAmount;
+        let totalInterest = 0;
+
+        const labels = ['Mês 0'];
+        const dataTotal = [initialAmount];
+        const dataInvested = [initialAmount];
+        const dataInterest = [0];
+
+        const tableBody = document.querySelector('#results-table tbody');
+        let tableRows = `
+            <tr>
+                <td>0</td>
+                <td>R$ 0,00</td>
+                <td>R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td>R$ 0,00</td>
+                <td>R$ 0,00</td>
+                <td>R$ ${currentTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+            </tr>
+        `;
+
+        for (let month = 1; month <= totalMonths; month++) {
+            const interestMonth = currentTotal * monthlyRate;
+            currentTotal += interestMonth + monthlyContribution;
+            totalInvested += monthlyContribution;
+            totalInterest += interestMonth;
+
+            // Alimenta dados para o gráfico
+            labels.push(`Mês ${month}`);
+            dataTotal.push(currentTotal);
+            dataInvested.push(totalInvested);
+            dataInterest.push(totalInterest);
+
+            // Adiciona linha na tabela
+            tableRows += `
+                <tr>
+                    <td>${month}</td>
+                    <td>R$ ${monthlyContribution.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${interestMonth.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td>R$ ${currentTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <!-- Preenchido via JavaScript -->
-            </tbody>
-        </table>
-    </div>
-</section>
+            `;
+        }
 
-<!-- Importando a biblioteca Chart.js via CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        tableBody.innerHTML = tableRows;
+
+        // Atualiza os Cards do Topo
+        document.getElementById('total-accumulated').innerText = `R$ ${currentTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('total-invested').innerText = `R$ ${totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('total-interest').innerText = `R$ ${totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // Renderiza o Gráfico
+        renderChart(labels, dataTotal, dataInvested, dataInterest);
+    }
+
+    function renderChart(labels, dataTotal, dataInvested, dataInterest) {
+        const ctx = document.getElementById('compoundChart').getContext('2d');
+        
+        if (compoundChart) {
+            compoundChart.destroy();
+        }
+
+        compoundChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Valor Total (R$)',
+                        data: dataTotal,
+                        borderColor: '#4f46e5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Total Investido (R$)',
+                        data: dataInvested,
+                        borderColor: '#10b981',
+                        backgroundColor: 'transparent',
+                        borderDash: [5, 5],
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Total em Juros (R$)',
+                        data: dataInterest,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Executa o cálculo inicial assim que a página é carregada
+    window.onload = calculateAndRender;
+</script>
+
+</body>
+</html>
